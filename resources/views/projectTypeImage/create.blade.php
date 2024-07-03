@@ -15,7 +15,7 @@ Project Image / Create
                 <div class="card-header">
                     <div class="row">
                         <div class="col-sm-4">
-                            <h4 class="card-title">Create Project Image</h4>
+                            <h4 class="card-title">Create Project Type Image</h4>
                         </div>
                     </div>
                     @if(session('error'))
@@ -34,7 +34,7 @@ Project Image / Create
                                             class="form-control bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-amber-500 focus:border-amber-500 block w-full p-2.5">
                                             <option selected>Choose Project Type</option>
                                             @foreach ($projectId as $tj)
-                                            <option value="{{ $tj->id }}">{{$tj->name}}</option>
+                                            <option value="{{ $tj->id }}">{{$tj->name}} - {{$tj->projectTypes->title}}</option>
                                             @endforeach
                                         </select>
                                         @error('id_project_type')

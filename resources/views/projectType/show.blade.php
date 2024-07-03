@@ -1,5 +1,5 @@
 @extends('layouts.master')
-<script src='//pchen66.github.io/js/three/three.min.js'></script>
+{{-- <script src='//pchen66.github.io/js/three/three.min.js'></script>
 <script src='//pchen66.github.io/js/panolens/panolens.min.js'></script>
 
 <style>
@@ -10,7 +10,7 @@
     .image-container:before {
         content: attr(data-image);
     }
-</style>
+</style> --}}
 @section('content')
 
 @section('breadcrumb')
@@ -95,7 +95,7 @@ Project / Detail / {{$projectType->id}}
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
+                            {{-- <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label style="color:black">Image 360°</label>
@@ -110,7 +110,7 @@ Project / Detail / {{$projectType->id}}
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
@@ -270,7 +270,7 @@ Project / Detail / {{$projectType->id}}
 @endsection
 
 @section('jquery')
-<script type="text/javascript">
+{{-- <script type="text/javascript">
     @if($projectType->image_360)
 
     const d = document;
@@ -292,5 +292,5 @@ Project / Detail / {{$projectType->id}}
     })
     @else
     @endif
-</script>
+</script> --}}
 @endsection

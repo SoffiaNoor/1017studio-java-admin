@@ -14,7 +14,9 @@ class ProjectTypeImageController extends Controller
         $projectTypeImage = ProjectTypeImage::all();
         $projectTypeImage = ProjectTypeImage::paginate(8);
         $jenisImage = ProjectType::all();
-        return view('projectTypeImage.index', compact('projectTypeImage', 'jenisImage'));
+        $projectTypeImages = ProjectTypeImage::with('projectType.projectTypes')->get();
+
+        return view('projectTypeImage.index', compact('projectTypeImage', 'jenisImage', 'projectTypeImages'));
     }
 
     public function create()

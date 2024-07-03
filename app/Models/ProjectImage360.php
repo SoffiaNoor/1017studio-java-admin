@@ -5,15 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ProjectTypeImage extends Model
+class ProjectImage360 extends Model
 {
     use HasFactory;
 
-    protected $table = 'project_type_image';
+    protected $table = 'project_type_image_360';
 
     protected $fillable = [
         'id_project_type',
-        'image',
+        'image_360',
     ];
 
     public function projectType()

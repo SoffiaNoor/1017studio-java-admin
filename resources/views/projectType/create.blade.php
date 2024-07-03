@@ -1,5 +1,5 @@
 @extends('layouts.master')
-<script src='//pchen66.github.io/js/three/three.min.js'></script>
+{{-- <script src='//pchen66.github.io/js/three/three.min.js'></script>
 <script src='//pchen66.github.io/js/panolens/panolens.min.js'></script>
 
 <style>
@@ -12,7 +12,7 @@
     .image-container:before {
         content: attr(data-image);
     }
-</style>
+</style> --}}
 @section('content')
 
 @section('breadcrumb')
@@ -108,7 +108,7 @@ Project Type / Create
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
+                            {{-- <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label style="color:black">Image 360°</label>
@@ -127,7 +127,7 @@ Project Type / Create
                                         @enderror
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
@@ -297,7 +297,7 @@ Project Type / Create
     });
 
 </script>
-<script type="text/javascript">
+{{-- <script type="text/javascript">
     const d = document;
     d.addEventListener('DOMContentLoaded', () => {
         const viewer = new PANOLENS.Viewer({
@@ -322,5 +322,5 @@ Project Type / Create
             reader.readAsDataURL(file);
         });
     });
-</script>
+</script> --}}
 @endsection

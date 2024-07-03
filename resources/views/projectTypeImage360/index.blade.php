@@ -14,12 +14,12 @@ Project Type Image
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between align-items-center">
-                        <h4 class="card-title">Project Type Image List</h4>
-                        <a class="btn btn-primary" href="/projectTypeImage/create">
-                            <i class="bi bi-plus-circle mx-1"></i>Add New Project Type Image
+                        <h4 class="card-title">Project Type Image 360 List</h4>
+                        <a class="btn btn-primary" href="/projectTypeImage360/create">
+                            <i class="bi bi-plus-circle mx-1"></i>Add New Project Type Image 360
                         </a>
                     </div>
-                    @if (count($projectTypeImage) > 0)
+                    @if (count($projectTypeImage360) > 0)
                     <div class="card-body">
                         @if (count($errors) > 0)
                         <div
@@ -51,16 +51,16 @@ Project Type Image
                                         Project Name
                                     </th>
                                     <th style="font-weight:500">
-                                        Image
+                                        Image 360
                                     </th>
                                     <th class="text-right" style="font-weight:500">
                                     </th>
                                 </thead>
                                 <tbody>
-                                    @foreach ($projectTypeImage as $c)
+                                    @foreach ($projectTypeImage360 as $c)
                                     <tr>
                                         <td>
-                                            {{ ($projectTypeImage->currentPage() - 1) * $projectTypeImage->perPage() +
+                                            {{ ($projectTypeImage360->currentPage() - 1) * $projectTypeImage360->perPage() +
                                             $loop->iteration }}
                                         </td>
                                         <td>
@@ -71,10 +71,10 @@ Project Type Image
                                         </td>
                                         <td>
                                             <div class="d-flex align-items-center">
-                                                @if($c->image)
+                                                @if($c->image_360)
                                                 <img class="object-contain items-center"
                                                     style="width:8rem;height:8rem;object-fit:cover"
-                                                    src="{{ $c->image }}">
+                                                    src="{{ $c->image_360 }}">
                                                 @else
                                                 <img class="object-contain items-center"
                                                     style="width:8rem;height:8rem;object-fit:cover"
@@ -83,9 +83,9 @@ Project Type Image
                                             </div>
                                         </td>
                                         <td class="text-right">
-                                            <a href="{{ route('projectTypeImage.show', $c->id) }}"><i
+                                            <a href="{{ route('projectTypeImage360.show', $c->id) }}"><i
                                                     class="now-ui-icons ui-1_zoom-bold"></i></a>
-                                            <a href="{{ route('projectTypeImage.edit', $c->id) }}"><i
+                                            <a href="{{ route('projectTypeImage360.edit', $c->id) }}"><i
                                                     class="bi bi-pencil mx-3"></i></a>
                                             <a href="#" data-bs-toggle="modal"
                                                 data-bs-target="#deleteModal{{$c->id}}"><i class="bi bi-trash3"></i></a>
@@ -112,7 +112,7 @@ Project Type Image
                                                             <button type="button" class="btn btn-secondary"
                                                                 data-bs-dismiss="modal">No</button>
                                                             <form
-                                                                action="{{ route('projectTypeImage.destroy', $c->id) }}"
+                                                                action="{{ route('projectTypeImage360.destroy', $c->id) }}"
                                                                 method="POST" style="display: inline;">
                                                                 @csrf
                                                                 @method('DELETE')
@@ -130,9 +130,9 @@ Project Type Image
                             </table>
                             <nav aria-label="Page navigation example">
                                 <ul class="pagination justify-content-end pt-4">
-                                    @if ($projectTypeImage->currentPage() > 1)
+                                    @if ($projectTypeImage360->currentPage() > 1)
                                     <li class="page-item">
-                                        <a class="page-link" href="{{ $projectTypeImage->previousPageUrl() }}"
+                                        <a class="page-link" href="{{ $projectTypeImage360->previousPageUrl() }}"
                                             tabindex="-1" style="color:#c1510c">
                                             <i class="fa fa-angle-left"></i>
                                             <span class="sr-only">Previous</span>
@@ -147,19 +147,19 @@ Project Type Image
                                     </li>
                                     @endif
 
-                                    @for ($i = 1; $i <= $projectTypeImage->lastPage(); $i++)
+                                    @for ($i = 1; $i <= $projectTypeImage360->lastPage(); $i++)
                                         <li
-                                            class="page-item {{ $i == $projectTypeImage->currentPage() ? 'active' : '' }}">
-                                            <a class="page-link" href="{{ $projectTypeImage->url($i) }}"
-                                                style="color:#c1510c;{{ $i == $projectTypeImage->currentPage() ? 'color:white;background-color:#c1510c;border:#c1510c' : '' }}">
+                                            class="page-item {{ $i == $projectTypeImage360->currentPage() ? 'active' : '' }}">
+                                            <a class="page-link" href="{{ $projectTypeImage360->url($i) }}"
+                                                style="color:#c1510c;{{ $i == $projectTypeImage360->currentPage() ? 'color:white;background-color:#c1510c;border:#c1510c' : '' }}">
                                                 {{ $i }}
                                             </a>
                                         </li>
                                         @endfor
 
-                                        @if ($projectTypeImage->currentPage() < $projectTypeImage->lastPage())
+                                        @if ($projectTypeImage360->currentPage() < $projectTypeImage360->lastPage())
                                             <li class="page-item">
-                                                <a class="page-link" href="{{ $projectTypeImage->nextPageUrl() }}"
+                                                <a class="page-link" href="{{ $projectTypeImage360->nextPageUrl() }}"
                                                     style="color:#c1510c">
                                                     <i class="fa fa-angle-right"></i>
                                                     <span class="sr-only">Next</span>

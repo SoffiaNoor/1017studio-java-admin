@@ -105,7 +105,7 @@ Project Type / Edit / {{$projectType->id}}
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
+                            {{-- <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label style="color:black"> Image 360</label>
@@ -130,7 +130,7 @@ Project Type / Edit / {{$projectType->id}}
                                         @enderror
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
@@ -303,18 +303,18 @@ Project Type / Edit / {{$projectType->id}}
         }
     });
 
-    const fileInput2 = document.getElementById('file_input2');
-    const imageDisplay2 = document.getElementById('image_display2');
+    // const fileInput2 = document.getElementById('file_input2');
+    // const imageDisplay2 = document.getElementById('image_display2');
 
-    fileInput2.addEventListener('change', function() {
-        if (fileInput2.files.length > 0) {
-            const reader2 = new FileReader();
-            reader2.onload = function(e) {
-                imageDisplay2.src = e.target.result;
-            };
-            reader2.readAsDataURL(fileInput2.files[0]);
-        }
-    });
+    // fileInput2.addEventListener('change', function() {
+    //     if (fileInput2.files.length > 0) {
+    //         const reader2 = new FileReader();
+    //         reader2.onload = function(e) {
+    //             imageDisplay2.src = e.target.result;
+    //         };
+    //         reader2.readAsDataURL(fileInput2.files[0]);
+    //     }
+    // });
 
     const fileInput3 = document.getElementById('file_input3');
     const imageDisplay3 = document.getElementById('image_display3');

@@ -50,19 +50,19 @@
       </div>
       <div class="sidebar-wrapper" id="sidebar-wrapper">
         <ul class="nav">
-          <li class="{{ preg_match('/information/',Route::current()->uri) == true ? 'active' : '' }}">
+          <li class="{{ Route::current()->uri == 'information' ?  'active' : '' }}">
             <a href="/information">
               <i class="now-ui-icons design_app"></i>
               <p>Information</p>
             </a>
           </li>
-          <li class="{{ preg_match('/imageInformation/',Route::current()->uri) == true ? 'active' : '' }}">
+          <li class="{{ Route::current()->uri == 'imageInformation' ?  'active' : '' }}">
             <a href="/imageInformation">
               <i class="now-ui-icons location_map-big"></i>
               <p>Image Information</p>
             </a>
           </li>
-          <li class="{{ preg_match('/facility/',Route::current()->uri) == true ? 'active' : '' }}">
+          <li class="{{ Route::current()->uri == 'facility' ?  'active' : '' }}">
             <a href="/facility">
               <i class="now-ui-icons location_map-big"></i>
               <p>Our FACILITIES</p>
@@ -99,6 +99,12 @@
                 <p>Project Type Image</p>
               </a>
             </li>
+            <li class="{{ Route::current()->uri == 'projectTypeImage360' ?  'active' : '' }}">
+              <a href="/projectTypeImage360">
+                <i class="now-ui-icons shopping_box"></i>
+                <p>Project Type Image 360</p>
+              </a>
+            </li>
           </div>
           <li class="{{ Route::current()->uri == 'news' ?  'active' : '' }}">
             <a href="/news">
@@ -112,10 +118,16 @@
               <p>News Image</p>
             </a>
           </li>
-          <li class="{{ preg_match('/contact/',Route::current()->uri) == true ? 'active' : '' }}">
+          <li class="{{ Route::current()->uri == 'contact' ?  'active' : '' }}">
             <a href="/contact">
               <i class="now-ui-icons design_bullet-list-67"></i>
               <p>Contact Form</p>
+            </a>
+          </li>
+          <li class="{{ Route::current()->uri == 'contact_information' ?  'active' : '' }}">
+            <a href="/contact_information">
+              <i class="now-ui-icons design_bullet-list-67"></i>
+              <p>Contact Information</p>
             </a>
           </li>
           <li class="{{ preg_match('/user/',Route::current()->uri) == true ? 'active' : '' }}">
@@ -157,36 +169,6 @@
       </nav>
       <!-- End Navbar -->
       @yield('content')
-
-      <footer class="footer">
-        <div class=" container-fluid ">
-          <nav>
-            <ul>
-              <li>
-                <a href="https://www.creative-tim.com">
-                  Creative Tim
-                </a>
-              </li>
-              <li>
-                <a href="http://presentation.creative-tim.com">
-                  About Us
-                </a>
-              </li>
-              <li>
-                <a href="http://blog.creative-tim.com">
-                  Blog
-                </a>
-              </li>
-            </ul>
-          </nav>
-          <div class="copyright" id="copyright">
-            &copy; <script>
-              document.getElementById('copyright').appendChild(document.createTextNode(new Date().getFullYear()))
-            </script>, Designed by <a href="https://www.invisionapp.com" target="_blank">Invision</a>. Coded by <a
-              href="https://www.creative-tim.com" target="_blank">Creative Tim</a>.
-          </div>
-        </div>
-      </footer>
     </div>
   </div>
 
