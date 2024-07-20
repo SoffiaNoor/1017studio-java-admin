@@ -36,7 +36,7 @@
             <div class="col-12 col-md-8 col-lg-6 col-xl-5">
                 <div class="card py-4 px-4">
                     <div class="d-flex justify-content-center mb-3">
-                        <img src="{{asset($information->logo_favicon)}}" style="max-width:150px;width:140px;" />
+                        <img src="{{asset($information->logo_company)}}" style="max-width:150px;width:140px;" />
                     </div>
                     <div class="division">
                         <div class="row">

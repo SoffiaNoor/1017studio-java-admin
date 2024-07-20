@@ -83,7 +83,8 @@ Contact Information / Edit
           {{ session('error') }}
         </div>
         @endif
-        <form method="POST" action="{{ route('contact_information.update',$contact_information->id)}}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('contact_information.update',$contact_information->id)}}"
+          enctype="multipart/form-data">
           @csrf
           @method('PUT')
           <div class="card-header">
@@ -118,8 +119,8 @@ Contact Information / Edit
                     </div>
                     @endif
                   </div>
-                  <input type="file" class="form-control mt-3 @error('header') is-invalid @enderror"
-                    id="file_input" name="header" value="">
+                  <input type="file" class="form-control mt-3 @error('header') is-invalid @enderror" id="file_input"
+                    name="header" value="">
                   <small class="text-muted">Please choose an image to upload.</small>
                   @error('header')
                   <span class="invalid-feedback" role="alert">
@@ -143,6 +144,18 @@ Contact Information / Edit
                 </div>
               </div>
             </div>
+            <div class="row">
+              <div class="col-md-12">
+                <label>File Brochure</label>
+                <input type="file" name="file" id="file" class="form-control @error('file') is-invalid @enderror"
+                  placeholder="File Brochure" value="{{$contact_information->file}}">
+                @error('file')
+                <span class="invalid-feedback" role="alert">
+                  <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+              </div>
+            </div>
         </form>
       </div>
     </div>
@@ -152,8 +165,21 @@ Contact Information / Edit
 @endsection
 
 @section('jquery')
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+</script>
+
 <script>
-    const fileInput = document.getElementById('file_input');
+    var myModal = document.getElementById('myModal')
+var myInput = document.getElementById('myInput')
+
+myModal.addEventListener('shown.bs.modal', function () {
+  myInput.focus()
+})
+</script>
+
+<script>
+  const fileInput = document.getElementById('file_input');
     const imageDisplay = document.getElementById('image_display');
 
     fileInput.addEventListener('change', function() {

@@ -5,6 +5,67 @@
 @section('breadcrumb')
 News / Detail / {{$news->id}}
 @endsection
+<style>
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+    }
+
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+    input:checked+.slider {
+        background-color: #e26111;
+    }
+
+    input:focus+.slider {
+        box-shadow: 0 0 1px #e26111;
+    }
+
+    input:checked+.slider:before {
+        -webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(26px);
+    }
+
+    /* Rounded sliders */
+    .slider.round {
+        border-radius: 34px;
+    }
+
+    .slider.round:before {
+        border-radius: 50%;
+    }
+</style>
 
 <div class="panel-header panel-header-sm">
 </div>
@@ -87,6 +148,19 @@ News / Detail / {{$news->id}}
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Tampilkan</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" id="is_show" name="is_show"
+                                    value="{{$news->is_show}}" {{ $news->is_show == 1 ? 'checked' : ''
+                                }} disabled>
+                                <span class="slider round"></span>
+                            </label>
+                            <div class="row">
+                                <div class="col-md-12">
                                     <a href="{{ route('news.edit', $news->id) }}" class="btn btn-primary text-white"
                                         type="submit"><i class="bi bi-pencil mx-1"></i>Edit</a>
                                     <a href="/news" class="btn btn-info text-white"><i
@@ -104,6 +178,18 @@ News / Detail / {{$news->id}}
 @endsection
 
 @section('jquery')
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+</script>
+
+<script>
+    var myModal = document.getElementById('myModal')
+var myInput = document.getElementById('myInput')
+
+myModal.addEventListener('shown.bs.modal', function () {
+  myInput.focus()
+})
+</script>
 <script>
     document.getElementById('video').addEventListener('input', function () {
         var youtubeLink = this.value.trim();

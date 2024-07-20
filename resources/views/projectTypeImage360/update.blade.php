@@ -34,10 +34,15 @@ Project Type Image / Edit / {{$projectTypeImage360->id}}
                                         <label style="color:black">Project Type Selected</label>
                                         <select id="id_project_type" name="id_project_type" required
                                             class="form-control bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-amber-500 focus:border-amber-500 block w-full p-2.5">
-                                            <option value="{{ $projectTypeImage360->projectType->id }}" selected required>
-                                                {{$projectTypeImage360->projectType->name}} - {{$projectTypeImage360->project()->title}}</option>
+                                            <option value="{{ $projectTypeImage360->projectType->id }}" selected>
+                                                {{$projectTypeImage360->projectType->name}} -
+                                                {{$projectTypeImage360->project()->title}}
+                                            </option>
                                             @foreach ($projectTypeImageAll as $tj)
-                                            <option value="{{ $tj->id }}">{{$tj->name}} - {{$tj->projectTypes->title}}</option>
+                                            @if ($tj->id != $projectTypeImage360->projectType->id)
+                                            <option value="{{ $tj->id }}">{{ $tj->name }} - {{ $tj->projectTypes->title
+                                                }}</option>
+                                            @endif
                                             @endforeach
                                         </select>
                                         @error('id_project_type')
@@ -93,6 +98,18 @@ Project Type Image / Edit / {{$projectTypeImage360->id}}
 @endsection
 
 @section('jquery')
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+</script>
+
+<script>
+    var myModal = document.getElementById('myModal')
+var myInput = document.getElementById('myInput')
+
+myModal.addEventListener('shown.bs.modal', function () {
+  myInput.focus()
+})
+</script>
 <script>
     const fileInput2 = document.getElementById('file_input2');
     const imageDisplay2 = document.getElementById('image_display2');

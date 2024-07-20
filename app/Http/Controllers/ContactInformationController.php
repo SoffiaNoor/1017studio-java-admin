@@ -24,38 +24,46 @@ class ContactInformationController extends Controller
     public function update(Request $request, ContactInformation $contact_information)
     {
         try {
+            // Define validation rules
             $rules = [
                 'title' => 'required',
-                'header' => ($request->hasFile('header') || !$contact_information->header) ? 'image|mimes:jpeg,jpg,png|max:2048' : '', // Check if image is required
+                'header' => 'nullable|image|mimes:jpeg,jpg,png|max:2048',
+                'file' => 'nullable|file|mimes:pdf',
             ];
 
-            if (!$request->hasFile('header') && !$contact_information->header) {
-                $rules['header'] = 'required|image|mimes:jpeg,jpg,png';
-            } elseif ($request->hasFile('header')) {
-                $rules['header'] = 'image|mimes:jpeg,jpg,png';
-            }
-
+            // Validate request
             $request->validate($rules);
 
+            // Get input data, excluding the token and method fields
             $input = $request->except(['_token', '_method']);
 
-            if (!empty($contact_information->header) && $request->hasFile('header')) {
-                $imagePath6 = $contact_information->header;
-
-                if (File::exists($imagePath6)) {
-                    File::delete($imagePath6);
+            // Handle header file upload and deletion
+            if ($request->hasFile('header')) {
+                if (!empty($contact_information->header) && File::exists($contact_information->header)) {
+                    File::delete($contact_information->header);
                 }
+
+                $header = $request->file('header');
+                $headerPath = 'images/contact_information/header/';
+                $headerName = "information-" . date('YmdHis') . "." . $header->getClientOriginalExtension();
+                $header->move(public_path($headerPath), $headerName);
+                $input['header'] = $headerPath . $headerName;
             }
 
-            if ($header = $request->file('header')) {
-                $destinationPath6 = 'images/contact_information/header/';
-                $profileImage6 = "information" . "-" . date('YmdHis') . "." . $header->getClientOriginalExtension();
-                $header->move($destinationPath6, $profileImage6);
-                $input['header'] = $destinationPath6 . $profileImage6;
-            } elseif (!$request->hasFile('header') && !$contact_information->header) {
-                unset($input['header']);
+            // Handle file upload and deletion
+            if ($request->hasFile('file')) {
+                if (!empty($contact_information->file) && File::exists($contact_information->file)) {
+                    File::delete($contact_information->file);
+                }
+
+                $file = $request->file('file');
+                $filePath = 'files/contact_information/';
+                $fileName = "information-" . date('YmdHis') . "." . $file->getClientOriginalExtension();
+                $file->move(public_path($filePath), $fileName);
+                $input['file'] = $filePath . $fileName;
             }
 
+            // Update the contact information
             $contact_information->update($input);
 
             return redirect()->route('contact_information.index')
@@ -63,7 +71,8 @@ class ContactInformationController extends Controller
 
         } catch (\Exception $e) {
             return redirect()->back()
-                ->with('error', 'Failed to update contact information. Please try again.');
+                ->with('error', 'Failed to update contact information. Please try again. Error: ' . $e->getMessage());
         }
     }
+
 }

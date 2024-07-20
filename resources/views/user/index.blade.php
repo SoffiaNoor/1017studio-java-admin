@@ -102,14 +102,14 @@ Users
                                     @if ($user->currentPage() > 1)
                                     <li class="page-item">
                                         <a class="page-link" href="{{ $user->previousPageUrl() }}" tabindex="-1"
-                                            style="color:#4a00e0">
+                                            style="color:#c1510c">
                                             <i class="fa fa-angle-left"></i>
                                             <span class="sr-only">Previous</span>
                                         </a>
                                     </li>
                                     @else
                                     <li class="page-item disabled">
-                                        <a class="page-link" href="javascript:;" tabindex="-1" style="color:#4a00e0">
+                                        <a class="page-link" href="javascript:;" tabindex="-1" style="color:#c1510c">
                                             <i class="fa fa-angle-left"></i>
                                             <span class="sr-only">Previous</span>
                                         </a>
@@ -119,7 +119,7 @@ Users
                                     @for ($i = 1; $i <= $user->lastPage(); $i++)
                                         <li class="page-item {{ $i == $user->currentPage() ? 'active' : '' }}">
                                             <a class="page-link" href="{{ $user->url($i) }}"
-                                                style="color:#4a00e0;{{ $i == $user->currentPage() ? 'color:white;background-color:#4a00e0;border:#4a00e0' : '' }}">
+                                                style="color:#c1510c;{{ $i == $user->currentPage() ? 'color:white;background-color:#c1510c;border:#c1510c' : '' }}">
                                                 {{ $i }}
                                             </a>
                                         </li>
@@ -128,14 +128,14 @@ Users
                                         @if ($user->currentPage() < $user->lastPage())
                                             <li class="page-item">
                                                 <a class="page-link" href="{{ $user->nextPageUrl() }}"
-                                                    style="color:#4a00e0">
+                                                    style="color:#c1510c">
                                                     <i class="fa fa-angle-right"></i>
                                                     <span class="sr-only">Next</span>
                                                 </a>
                                             </li>
                                             @else
                                             <li class="page-item disabled">
-                                                <a class="page-link" href="javascript:;" style="color:#4a00e0">
+                                                <a class="page-link" href="javascript:;" style="color:#c1510c">
                                                     <i class="fa fa-angle-right"></i>
                                                     <span class="sr-only">Next</span>
                                                 </a>

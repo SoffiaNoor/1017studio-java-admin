@@ -32,7 +32,7 @@ Project Image / Create
                                         <label style="color:black">Project Selected</label>
                                         <select id="countries" name="id_project_image" required
                                             class="form-control bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-amber-500 focus:border-amber-500 block w-full p-2.5">
-                                            <option selected>Choose Project Type</option>
+                                            <option value="" disabled selected>Choose Project Type</option>
                                             @foreach ($projectId as $tj)
                                             <option value="{{ $tj->id }}">{{$tj->title}}</option>
                                             @endforeach
@@ -84,6 +84,18 @@ Project Image / Create
 @endsection
 
 @section('jquery')
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+</script>
+
+<script>
+    var myModal = document.getElementById('myModal')
+var myInput = document.getElementById('myInput')
+
+myModal.addEventListener('shown.bs.modal', function () {
+  myInput.focus()
+})
+</script>
 <script>
     const fileInput = document.getElementById('file_input');
     const imageDisplay = document.getElementById('image_display');

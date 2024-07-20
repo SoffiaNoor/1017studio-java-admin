@@ -44,11 +44,11 @@ Website Information
     }
 
     input:checked+.slider {
-        background-color: #2196F3;
+        background-color: #e26111;
     }
 
     input:focus+.slider {
-        box-shadow: 0 0 1px #2196F3;
+        box-shadow: 0 0 1px #e26111;
     }
 
     input:checked+.slider:before {
@@ -422,6 +422,20 @@ Website Information
 @endsection
 
 @section('jquery')
+@section('jquery')
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+</script>
+
+<script>
+    var myModal = document.getElementById('myModal')
+var myInput = document.getElementById('myInput')
+
+myModal.addEventListener('shown.bs.modal', function () {
+  myInput.focus()
+})
+</script>
+
 <script>
     const fileInput = document.getElementById('file_input');
     const imageDisplay = document.getElementById('image_display');

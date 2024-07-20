@@ -27,6 +27,7 @@ class NewsController extends Controller
             'title' => 'required|max:255',
             'image' => 'required|image|mimes:jpeg,jpg,png',
             'description' => 'required',
+            'is_show' => 'required|boolean',
         ], [
             'title.required' => 'Title is required.',
             'title.max' => 'Title should not exceed 255 characters.',
@@ -65,6 +66,7 @@ class NewsController extends Controller
             'title' => 'required|max:255',
             'image' => ($request->hasFile('image') || !$news->image) ? 'image|mimes:jpeg,jpg,png|max:2048' : '',
             'description' => 'required',
+            'is_show' => 'required|boolean',
         ], [
             'title.required' => 'Title is required.',
             'title.max' => 'Title should not exceed 255 characters.',
@@ -91,7 +93,7 @@ class NewsController extends Controller
         } elseif (!$request->hasFile('image') && !$news->image) {
             unset($input['image']);
         }
-
+        $news->is_show = $request->input('is_show');
         $news->update($input);
 
         return redirect()->route('news.index')

@@ -14,5 +14,6 @@ class ContactInformation extends Model
     protected $fillable = [
         'title',
         'header',
+        'file',
     ];
 }

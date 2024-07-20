@@ -5,67 +5,6 @@
 @section('breadcrumb')
 Contact Information
 @endsection
-<style>
-    .switch {
-        position: relative;
-        display: inline-block;
-        width: 60px;
-        height: 34px;
-    }
-
-    .switch input {
-        opacity: 0;
-        width: 0;
-        height: 0;
-    }
-
-    .slider {
-        position: absolute;
-        cursor: pointer;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: #ccc;
-        -webkit-transition: .4s;
-        transition: .4s;
-    }
-
-    .slider:before {
-        position: absolute;
-        content: "";
-        height: 26px;
-        width: 26px;
-        left: 4px;
-        bottom: 4px;
-        background-color: white;
-        -webkit-transition: .4s;
-        transition: .4s;
-    }
-
-    input:checked+.slider {
-        background-color: #2196F3;
-    }
-
-    input:focus+.slider {
-        box-shadow: 0 0 1px #2196F3;
-    }
-
-    input:checked+.slider:before {
-        -webkit-transform: translateX(26px);
-        -ms-transform: translateX(26px);
-        transform: translateX(26px);
-    }
-
-    /* Rounded sliders */
-    .slider.round {
-        border-radius: 34px;
-    }
-
-    .slider.round:before {
-        border-radius: 50%;
-    }
-</style>
 
 <div class="panel-header panel-header-sm">
 </div>
@@ -86,7 +25,8 @@ Contact Information
                 <div class="card-header">
                     <div class="d-flex justify-content-between align-items-center">
                         <h4 class="card-title title">Contact Information</h4>
-                        <a class="btn btn-primary" href="{{ route('contact_information.edit', $contact_information->id) }}">
+                        <a class="btn btn-primary"
+                            href="{{ route('contact_information.edit', $contact_information->id) }}">
                             <i class="bi bi-pencil mx-1"></i>Change Contact Information
                         </a>
                     </div>
@@ -130,6 +70,27 @@ Contact Information
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label>File Brochure</label>
+
+                                @if($contact_information->file)
+                                <input type="text" name="file" id="file" class="form-control"
+                                    placeholder="File Brochure" value="{{ basename($contact_information->file) }}"
+                                    disabled>
+                                <a href="{{ asset($contact_information->file) }}" target="_blank"
+                                    class="btn btn-primary">View File</a>
+                                @else
+                                <p>No file uploaded</p>
+                                @endif
+
+                                @error('file')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -140,6 +101,19 @@ Contact Information
 @endsection
 
 @section('jquery')
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+</script>
+
+<script>
+    var myModal = document.getElementById('myModal')
+var myInput = document.getElementById('myInput')
+
+myModal.addEventListener('shown.bs.modal', function () {
+  myInput.focus()
+})
+</script>
+
 <script>
     const fileInput = document.getElementById('file_input');
     const imageDisplay = document.getElementById('image_display');

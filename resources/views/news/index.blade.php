@@ -5,6 +5,67 @@
 @section('breadcrumb')
 News
 @endsection
+<style>
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+    }
+
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+    input:checked+.slider {
+        background-color: #e26111;
+    }
+
+    input:focus+.slider {
+        box-shadow: 0 0 1px #e26111;
+    }
+
+    input:checked+.slider:before {
+        -webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(26px);
+    }
+
+    /* Rounded sliders */
+    .slider.round {
+        border-radius: 34px;
+    }
+
+    .slider.round:before {
+        border-radius: 50%;
+    }
+</style>
 
 <div class="panel-header panel-header-sm">
 </div>
@@ -53,6 +114,9 @@ News
                                     <th style="font-weight:500">
                                         Description
                                     </th>
+                                    <th style="font-weight:500">
+                                        Tampilkan
+                                    </th>
                                     <th class="text-right" style="font-weight:500">
                                     </th>
                                 </thead>
@@ -77,6 +141,14 @@ News
                                         </td>
                                         <td>
                                             {!! substr($c->description,0,100).'...' !!}
+                                        </td>
+                                        <td>
+                                            <label class="switch">
+                                                <input type="checkbox" id="maintenance" name="maintenance"
+                                                    value="{{$c->is_show}}" {{ $c->is_show == 1 ? 'checked' : ''
+                                                }} disabled>
+                                                <span class="slider round"></span>
+                                            </label>
                                         </td>
                                         <td class="text-right">
                                             <a href="{{ route('news.show', $c->id) }}"><i

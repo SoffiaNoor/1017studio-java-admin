@@ -62,7 +62,7 @@
               <p>Image Information</p>
             </a>
           </li>
-          <li class="{{ Route::current()->uri == 'facility' ?  'active' : '' }}">
+          <li class="{{ request()->is('facility*') ? 'active' : '' }}">
             <a href="/facility">
               <i class="now-ui-icons location_map-big"></i>
               <p>Our FACILITIES</p>
@@ -124,34 +124,37 @@
               <p>Contact Form</p>
             </a>
           </li>
-          <li class="{{ Route::current()->uri == 'contact_information' ?  'active' : '' }}">
+          <li class="{{ request()->is('contact_information*') ? 'active' : '' }}">
             <a href="/contact_information">
               <i class="now-ui-icons design_bullet-list-67"></i>
               <p>Contact Information</p>
             </a>
           </li>
-          <li class="{{ preg_match('/user/',Route::current()->uri) == true ? 'active' : '' }}">
+          <li class="{{ request()->is('user*') ? 'active' : '' }}">
             <a href="/user">
               <i class="now-ui-icons users_single-02"></i>
               <p>User List</p>
             </a>
           </li>
           <li class="active-pro">
-            <form method="POST" action="{{ route('logout') }}">
-              @csrf
-              <button type="submit"
-                style="background: none; border: none; cursor: pointer;margin: 10px 15px 0;color: #FFFFFF;text-transform: uppercase;font-size: 0.7142em;">
-                <i class="now-ui-icons media-1_button-power"></i>
-                <p>Logout</p>
-              </button>
-            </form>
+            <a style="background: linear-gradient(to right, #271912 0%, #302014ed 60%, #312824 100%);">
+              <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit"
+                  style="background: none; border: none; cursor: pointer; display: flex; align-items: center; color: #FFFFFF; text-transform: uppercase; padding: 0; border-radius: 4px;">
+                  <i class="now-ui-icons media-1_button-power"></i>
+                  <p style="margin: 0;">Logout</p>
+                </button>
+              </form>
+            </a>
           </li>
         </ul>
       </div>
     </div>
     <div class="main-panel" id="main-panel">
       <!-- Navbar -->
-      <nav class="navbar navbar-expand-lg navbar-transparent  bg-primary  navbar-absolute">
+      <nav class="navbar navbar-expand-lg navbar-transparent  bg-primary  navbar-absolute"
+        style="background-color:transparent!important">
         <div class="container-fluid">
           <div class="navbar-wrapper">
             <div class="navbar-toggle">
