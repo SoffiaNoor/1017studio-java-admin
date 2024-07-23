@@ -128,7 +128,7 @@ News
                                             $loop->iteration }}
                                         </td>
                                         <td>
-                                            {{$c->title}}
+                                            {!! substr($c->title,0,30).'...' !!}
                                         </td>
                                         <td>
                                             <div class="d-flex align-items-center">
@@ -140,7 +140,7 @@ News
                                             </div>
                                         </td>
                                         <td>
-                                            {!! substr($c->description,0,100).'...' !!}
+                                            {!! substr($c->description,0,200).'...' !!}
                                         </td>
                                         <td>
                                             <label class="switch">
