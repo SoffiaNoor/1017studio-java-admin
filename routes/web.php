@@ -16,6 +16,8 @@ use App\Http\Controllers\ProjectTypeImageController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\NewsImageController;
 use App\Http\Controllers\ProjectImage360Controller;
+use App\Exports\ContactsExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 Route::middleware(['guest'])->group(function () {
     Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
@@ -42,4 +44,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/user', ProfileController::class);
     Route::post('user/{user}/change-password', [ProfileController::class, 'changePassword'])->name('user.changePassword');
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::get('/contacts/export', function () {
+        return Excel::download(new ContactsExport, 'contacts.xlsx');
+    })->name('contacts.export');
 });

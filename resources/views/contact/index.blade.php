@@ -3,7 +3,7 @@
 @section('content')
 
 @section('breadcrumb')
-    Contact
+Contact
 @endsection
 
 <div class="panel-header panel-header-sm">
@@ -15,6 +15,7 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between align-items-center">
                         <h4 class="card-title">Contact List</h4>
+                        <a href="{{ route('contacts.export') }}" class="btn btn-primary">Export to Excel</a>
                     </div>
                     @if (count($contact) > 0)
                     <div class="card-body">
@@ -74,7 +75,8 @@
                                             <a href="{{ route('contact.show', $c->id) }}"><i
                                                     class="now-ui-icons ui-1_zoom-bold"></i></a>
                                             <a href="#" data-bs-toggle="modal"
-                                                data-bs-target="#deleteModal{{$c->id}}"><i class="bi bi-trash3 ml-2"></i></a>
+                                                data-bs-target="#deleteModal{{$c->id}}"><i
+                                                    class="bi bi-trash3 ml-2"></i></a>
                                             <!-- Modal -->
                                             <div class="modal fade" id="deleteModal{{$c->id}}" tabindex="-1"
                                                 role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
