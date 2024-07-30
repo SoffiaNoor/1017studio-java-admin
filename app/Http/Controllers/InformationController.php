@@ -33,7 +33,7 @@ class InformationController extends Controller
                 'order_wa' => 'required',
                 'maintenance' => 'required|boolean',
                 'header_image' => ($request->hasFile('header_image') || !$information->header_image) ? 'image|mimes:jpeg,jpg,png|max:2048' : '', // Check if image is required
-                'footer_image' => ($request->hasFile('footer_image') || !$information->footer_image) ? 'image|mimes:jpeg,jpg,png|max:2048' : '',
+                // 'footer_image' => ($request->hasFile('footer_image') || !$information->footer_image) ? 'image|mimes:jpeg,jpg,png|max:2048' : '',
             ];
 
             if (!$request->hasFile('logo_header') && !$information->logo_header) {
@@ -66,11 +66,11 @@ class InformationController extends Controller
                 $rules['header_image'] = 'image|mimes:jpeg,jpg,png';
             }
 
-            if (!$request->hasFile('footer_image') && !$information->footer_image) {
-                $rules['footer_image'] = 'required|image|mimes:jpeg,jpg,png';
-            } elseif ($request->hasFile('footer_image')) {
-                $rules['footer_image'] = 'image|mimes:jpeg,jpg,png';
-            }
+            // if (!$request->hasFile('footer_image') && !$information->footer_image) {
+            //     $rules['footer_image'] = 'required|image|mimes:jpeg,jpg,png';
+            // } elseif ($request->hasFile('footer_image')) {
+            //     $rules['footer_image'] = 'image|mimes:jpeg,jpg,png';
+            // }
 
             $request->validate($rules);
 
