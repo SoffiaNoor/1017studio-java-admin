@@ -33,6 +33,7 @@ class InformationController extends Controller
                 'order_wa' => 'required',
                 'maintenance' => 'required|boolean',
                 'header_image' => ($request->hasFile('header_image') || !$information->header_image) ? 'image|mimes:jpeg,jpg,png|max:2048' : '', // Check if image is required
+                'footer_image' => ($request->hasFile('footer_image') || !$information->footer_image) ? 'image|mimes:jpeg,jpg,png|max:2048' : '',
             ];
 
             if (!$request->hasFile('logo_header') && !$information->logo_header) {
@@ -63,6 +64,12 @@ class InformationController extends Controller
                 $rules['header_image'] = 'required|image|mimes:jpeg,jpg,png';
             } elseif ($request->hasFile('header_image')) {
                 $rules['header_image'] = 'image|mimes:jpeg,jpg,png';
+            }
+
+            if (!$request->hasFile('footer_image') && !$information->footer_image) {
+                $rules['footer_image'] = 'required|image|mimes:jpeg,jpg,png';
+            } elseif ($request->hasFile('footer_image')) {
+                $rules['footer_image'] = 'image|mimes:jpeg,jpg,png';
             }
 
             $request->validate($rules);
@@ -118,6 +125,14 @@ class InformationController extends Controller
                 }
             }
 
+            if (!empty($information->footer_image) && $request->hasFile('footer_image')) {
+                $imagePath7 = $information->footer_image;
+
+                if (File::exists($imagePath7)) {
+                    File::delete($imagePath7);
+                }
+            }
+
             if ($logo_header = $request->file('logo_header')) {
                 $destinationPath = 'images/information/logo_header/';
                 $profileImage = "information" . "-" . "logo_header" . date('YmdHis') . "." . $logo_header->getClientOriginalExtension();
@@ -162,6 +177,16 @@ class InformationController extends Controller
             } elseif (!$request->hasFile('header_image') && !$information->header_image) {
                 unset($input['header_image']);
             }
+
+            if ($footer_image = $request->file('footer_image')) {
+                $destinationPath7 = 'images/information/footer_image/';
+                $profileImage7 = "information" . "-" . date('YmdHis') . "." . $footer_image->getClientOriginalExtension();
+                $footer_image->move($destinationPath7, $profileImage7);
+                $input['footer_image'] = $destinationPath7 . $profileImage7;
+            } elseif (!$request->hasFile('footer_image') && !$information->footer_image) {
+                unset($input['footer_image']);
+            }
+
             $information->maintenance = $request->input('maintenance');
 
             $information->update($input);

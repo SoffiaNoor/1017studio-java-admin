@@ -16,6 +16,7 @@ class Information extends Model
         'logo_favicon',
         'logo_company',
         'header_image',
+        'header_video',
         'video',
         'name',
         'image',
@@ -29,6 +30,7 @@ class Information extends Model
         'google_map',
         'link_wa',
         'order_wa',
+        'footer_image',
         'maintenance',
     ];
 }

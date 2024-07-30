@@ -232,6 +232,66 @@ Website Information
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
+                                    <label>Footer Image</label>
+                                    <div class="grid grid-cols-6">
+                                        @if($information->footer_image)
+                                        <div class="p-3 shadow-lg text-center"
+                                            style="background-color: #c7c7c7;border-radius:20px">
+                                            <img id="image_display6" class="object-contain items-center"
+                                                style="width:auto;height:10rem;object-fit:cover"
+                                                src="{{asset($information->footer_image)}}">
+                                        </div>
+                                        @else
+                                        <img id="image_display6" class="object-contain items-center"
+                                            style="width:10rem;height:10rem;object-fit:cover"
+                                            src="{{ asset('assets/img/no-photo.png') }}">
+                                        @endif
+                                    </div>
+                                    <input type="file" class="form-control mt-3" id="file_input6" name="footer_image"
+                                        value="" disabled>
+                                    @error('footer_image')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Header Video (YouTube Link)</label>
+                                    <div class="grid grid-cols-6">
+                                        <div id="header_video_container">
+                                            @if($information->header_video)
+                                            <iframe width="100%" height="100%" id="header_video_display" type="hidden"
+                                                src="https://www.youtube.com/embed/{{ $information->header_video }}?autoplay=1&loop=1&playlist={{ $information->header_video }}"
+                                                frameborder="0" allow="autoplay; loop; encrypted-media"
+                                                allowfullscreen></iframe>
+                                            @else
+                                            <img id="video_display2" class="object-contain items-center"
+                                                style="width:20rem;height:10rem;object-fit:cover"
+                                                src="{{ asset('assets/img/no-video.png') }}">
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <input type="text"
+                                        class="form-control mt-3 @error('header_video') is-invalid @enderror"
+                                        id="header_video_input" placeholder="Enter YouTube Video Link"
+                                        value="https://www.youtube.com/embed/{{ $information->header_video }}" disabled>
+                                    <input type="hidden" id="header_video" name="header_video"
+                                        value="{{$information->header_video}}" disabled>
+                                    @error('header_video')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
                                     <label>About Us Video (YouTube Link) (*optional)</label>
                                     <div class="grid grid-cols-6">
                                         <div id="video_container">

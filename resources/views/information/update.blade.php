@@ -240,6 +240,62 @@ Website Information / Edit
             <div class="row">
               <div class="col-md-12">
                 <div class="form-group">
+                  <label style="color:black">Footer Image</label>
+                  <div class="grid grid-cols-6">
+                    @if($information->footer_image)
+                    <div class="p-3 shadow-lg text-center" style="background-color: #c7c7c7;border-radius:20px">
+                      <img id="image_display7" class="object-contain items-center"
+                        style="width:auto;height:10rem;object-fit:cover" src="{{asset($information->footer_image)}}">
+                    </div>
+                    @else
+                    <div class="p-3 shadow-lg text-center" style="background-color: #c7c7c7;border-radius:20px">
+                      <img id="image_display7" class="object-contain items-center"
+                        style="width:10rem;height:10rem;object-fit:cover" src="{{ asset('assets/img/no-photo.png') }}">
+                    </div>
+                    @endif
+                  </div>
+                  <input type="file" class="form-control mt-3 @error('footer_image') is-invalid @enderror"
+                    id="file_input7" name="footer_image" value="">
+                  <small class="text-muted">Please choose an image to upload.</small>
+                  @error('footer_image')
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
+                  @enderror
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Header Video (YouTube Link)</label>
+                  <div class="grid grid-cols-6">
+                    <div id="header_video_container">
+                      @if($information->header_video)
+                      <iframe width="100%" height="100%" id="header_video_display" type="hidden"
+                        src="https://www.youtube.com/embed/{{ $information->header_video }}?autoplay=1&loop=1&playlist={{ $information->header_video }}"
+                        frameborder="0" allow="autoplay; loop; encrypted-media" allowfullscreen></iframe>
+                      @else
+                      <img id="video_display2" class="object-contain items-center"
+                        style="width:20rem;height:10rem;object-fit:cover" src="{{ asset('assets/img/no-video.png') }}">
+                      @endif
+                    </div>
+                  </div>
+                  <input type="text" class="form-control mt-3 @error('header_video') is-invalid @enderror"
+                    id="header_video_input" placeholder="Enter YouTube Video Link"
+                    value="https://www.youtube.com/embed/{{ $information->header_video }}">
+                  <input type="hidden" id="header_video" name="header_video" value="{{$information->header_video}}">
+                  @error('header_video')
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
+                  @enderror
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
                   <label>About Us Video (YouTube Link) (*optional)</label>
                   <div class="grid grid-cols-6">
                     <div id="video_container">
@@ -482,11 +538,11 @@ Website Information / Edit
 @section('jquery')
 @section('jquery')
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+  integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
 </script>
 
 <script>
-    var myModal = document.getElementById('myModal')
+  var myModal = document.getElementById('myModal')
 var myInput = document.getElementById('myInput')
 
 myModal.addEventListener('shown.bs.modal', function () {
@@ -560,6 +616,19 @@ myModal.addEventListener('shown.bs.modal', function () {
         }
     });
 
+    const fileInput7 = document.getElementById('file_input7');
+    const imageDisplay7 = document.getElementById('image_display7');
+
+    fileInput7.addEventListener('change', function() {
+        if (fileInput7.files.length > 0) {
+            const reader7 = new FileReader();
+            reader7.onload = function(e) {
+              imageDisplay7.src = e.target.result;
+            };
+            reader7.readAsDataURL(fileInput7.files[0]);
+        }
+    });
+
     document.getElementById('video').addEventListener('input', function () {
         var youtubeLink = this.value.trim();
         var videoContainer = document.getElementById('video_container');
@@ -585,5 +654,37 @@ myModal.addEventListener('shown.bs.modal', function () {
             return null;
         }
     }
+</script>
+<script>
+  document.getElementById('header_video_input').addEventListener('input', function () {
+    var youtubeLink = this.value.trim();
+    var headerVideoContainer = document.getElementById('header_video_container');
+    var headerVideoInput = document.getElementById('header_video');
+
+    if (youtubeLink === '') {
+        headerVideoContainer.innerHTML = '<p id="header_video_display" class="text-muted">No header video</p>';
+        headerVideoInput.value = '';
+    } else {
+        var videoId = extractVideoId(youtubeLink);
+        if (videoId) {
+            headerVideoContainer.innerHTML = '<p id="header_video_display">' + videoId + '</p>';
+            headerVideoInput.value = videoId;
+        } else {
+            headerVideoContainer.innerHTML = '<p class="text-danger">Invalid YouTube link</p>';
+            headerVideoInput.value = '';
+        }
+    }
+});
+
+function extractVideoId(url) {
+    var regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+    var match = url.match(regExp);
+    if (match && match[2].length === 11) {
+        return match[2];
+    } else {
+        return null;
+    }
+}
+
 </script>
 @endsection
