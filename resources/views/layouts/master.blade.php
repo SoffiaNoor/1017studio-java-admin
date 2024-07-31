@@ -112,6 +112,12 @@
               <p>News</p>
             </a>
           </li>
+          <li class="{{ Route::current()->uri == 'news_information' ?  'active' : '' }}">
+            <a href="/news_information">
+              <i class="now-ui-icons business_money-coins"></i>
+              <p>News Information</p>
+            </a>
+          </li>
           <li class="{{ Route::current()->uri == 'newsImage' ?  'active' : '' }}">
             <a href="/newsImage">
               <i class="now-ui-icons business_money-coins"></i>

@@ -17,6 +17,7 @@ use App\Http\Controllers\NewsController;
 use App\Http\Controllers\NewsImageController;
 use App\Http\Controllers\ProjectImage360Controller;
 use App\Exports\ContactsExport;
+use App\Http\Controllers\NewsInformationController;
 use Maatwebsite\Excel\Facades\Excel;
 
 Route::middleware(['guest'])->group(function () {
@@ -33,6 +34,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/imageInformation', ImageInformationController::class);
     Route::resource('/contact', ContactController::class);
     Route::resource('/contact_information', ContactInformationController::class);
+    Route::resource('/news_information', NewsInformationController::class);
     Route::resource('/projectImage', ProjectImageController::class);
     Route::resource('/facility', FacilityController::class);
     Route::resource('/project', ProjectController::class);
