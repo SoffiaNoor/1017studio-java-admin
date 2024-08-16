@@ -140,7 +140,7 @@ News
                                             </div>
                                         </td>
                                         <td>
-                                            {!! substr($c->description,0,200).'...' !!}
+                                            {{ Str::limit(strip_tags($c->description), 100) }}
                                         </td>
                                         <td>
                                             <label class="switch">

@@ -68,13 +68,17 @@
               <p>Our FACILITIES</p>
             </a>
           </li>
-          <li class="px-4 pt-3" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse">
-            <p style="font-weight:bold;color:white">PROJECT</p>
-            <hr style="margin-top:0px;border-top: 3px solid #fff;">
+          <li class="px-4 pt-3 d-flex align-items-center justify-content-between" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" style="position: relative;">
+            <p class="mb-0" style="font-weight:bold;color:white;">PROJECT</p>
+            <div style="display: flex; align-items: center;">
+              <i class="fas fa-plus" id="expand-icon" style="color:white; margin-left: 8px; transition: transform 0.3s;"></i>
+              <i class="fas fa-minus d-none" id="collapse-icon" style="color:white; margin-left: 8px; transition: transform 0.3s;"></i>
+            </div>
+            <hr style="position: absolute; width: 80%; border-top: 3px solid #fff; margin-top: 3rem;"/>
           </li>
           <div
-            class="collapse {{ preg_match('/project|projectImage|projectType|projectTypeImage/', Route::current()->uri) ? 'show' : '' }}"
-            id="dashboard-collapse">
+            class="pt-3 collapse {{ preg_match('/project|projectImage|projectType|projectTypeImage/', Route::current()->uri) ? 'show' : '' }}"
+            id="dashboard-collapse" data-bs-parent="#dashboard-collapse">
             <li class="{{ Route::current()->uri == 'project' ?  'active' : '' }}">
               <a href="/project">
                 <i class="now-ui-icons ui-2_settings-90"></i>
@@ -142,7 +146,7 @@
               <p>User List</p>
             </a>
           </li>
-          <li class="active-pro">
+          <li class="active">
             <a style="background: linear-gradient(to right, #271912 0%, #302014ed 60%, #312824 100%);">
               <form method="POST" action="{{ route('logout') }}">
                 @csrf
@@ -204,6 +208,23 @@
       // Javascript method's body can be found in assets/js/demos.js
       demo.initDashboardPageCharts();
 
+    });
+  </script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var collapseElement = document.getElementById('dashboard-collapse');
+      var expandIcon = document.getElementById('expand-icon');
+      var collapseIcon = document.getElementById('collapse-icon');
+      
+      collapseElement.addEventListener('show.bs.collapse', function () {
+        expandIcon.classList.add('d-none');
+        collapseIcon.classList.remove('d-none');
+      });
+      
+      collapseElement.addEventListener('hide.bs.collapse', function () {
+        expandIcon.classList.remove('d-none');
+        collapseIcon.classList.add('d-none');
+      });
     });
   </script>
 </body>

@@ -51,6 +51,9 @@ Contact
                                     <th style="font-weight:500">
                                         Handphone
                                     </th>
+                                    <th style="font-weight:500">
+                                        Message
+                                    </th>
                                     <th class="text-right" style="font-weight:500">
 
                                     </th>
@@ -70,6 +73,9 @@ Contact
                                         </td>
                                         <td>
                                             {{$c->handphone}}
+                                        </td>
+                                        <td>
+                                            {{ Str::limit(strip_tags($c->message), 50) }}
                                         </td>
                                         <td class="text-right">
                                             <a href="{{ route('contact.show', $c->id) }}"><i

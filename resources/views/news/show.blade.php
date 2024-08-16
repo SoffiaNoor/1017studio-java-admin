@@ -111,10 +111,8 @@ News / Detail / {{$news->id}}
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label style="color:black">Description</label>
-                                        <div style="text-align: justify">
-                                            <div class="form-control" style="text-align: justify" disabled>{!!
-                                                $news->description !!}
-                                            </div>
+                                        <div class="form-control" disabled>{!!
+                                            $news->description !!}
                                         </div>
                                     </div>
                                 </div>
@@ -154,8 +152,8 @@ News / Detail / {{$news->id}}
                                 </div>
                             </div>
                             <label class="switch">
-                                <input type="checkbox" id="is_show" name="is_show"
-                                    value="{{$news->is_show}}" {{ $news->is_show == 1 ? 'checked' : ''
+                                <input type="checkbox" id="is_show" name="is_show" value="{{$news->is_show}}" {{
+                                    $news->is_show == 1 ? 'checked' : ''
                                 }} disabled>
                                 <span class="slider round"></span>
                             </label>

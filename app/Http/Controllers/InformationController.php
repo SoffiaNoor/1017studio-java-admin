@@ -133,6 +133,14 @@ class InformationController extends Controller
                 }
             }
 
+            if (!empty($information->header_video) && $request->hasFile('header_video')) {
+                $imagePath8 = $information->header_video;
+
+                if (File::exists($imagePath8)) {
+                    File::delete($imagePath8);
+                }
+            }
+
             if ($logo_header = $request->file('logo_header')) {
                 $destinationPath = 'images/information/logo_header/';
                 $profileImage = "information" . "-" . "logo_header" . date('YmdHis') . "." . $logo_header->getClientOriginalExtension();
@@ -185,6 +193,15 @@ class InformationController extends Controller
                 $input['footer_image'] = $destinationPath7 . $profileImage7;
             } elseif (!$request->hasFile('footer_image') && !$information->footer_image) {
                 unset($input['footer_image']);
+            }
+
+            if ($header_video = $request->file('header_video')) {
+                $destinationPath8 = 'images/information/header_video/';
+                $profileImage8 = "information" . "-" . date('YmdHis') . "." . $header_video->getClientOriginalExtension();
+                $header_video->move($destinationPath8, $profileImage8);
+                $input['header_video'] = $destinationPath8 . $profileImage8;
+            } elseif (!$request->hasFile('header_video') && !$information->header_video) {
+                unset($input['header_video']);
             }
 
             $information->maintenance = $request->input('maintenance');

@@ -80,7 +80,7 @@ Facility
                                             </div>
                                         </td>
                                         <td>
-                                            {{$c->description}}
+                                            {{ Str::limit(strip_tags($c->description), 100) }}
                                         </td>
                                         <td class="text-right">
                                             <a href="{{ route('facility.show', $c->id) }}"><i

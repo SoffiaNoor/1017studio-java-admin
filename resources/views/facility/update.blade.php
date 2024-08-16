@@ -73,10 +73,9 @@ Facility / Edit / {{$facility->id}}
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Description</label>
-                                        <textarea rows="10" cols="80"
-                                            class="form-control @error('description') is-invalid @enderror"
-                                            id="description" name="description"
-                                            placeholder="Here can be your description">{{$facility->description}}</textarea>
+                                        <div id="editor1"></div>
+                                        <textarea class="@error('description') is-invalid @enderror" name="description"
+                                            style="display:none;">{{$facility->description}}</textarea>
                                         @error('description')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -129,5 +128,60 @@ myModal.addEventListener('shown.bs.modal', function () {
             reader.readAsDataURL(fileInput.files[0]);
         }
     });
+</script>
+
+<!-- Include pell CSS and JS from CDN -->
+<link rel="stylesheet" href="https://unpkg.com/pell/dist/pell.min.css">
+<script src="https://unpkg.com/pell"></script>
+
+<script>
+    @foreach(['description'] as $fieldName)
+        const editor = pell.init({
+            element: document.getElementById('editor{{$loop->iteration}}'),
+            onChange: function (html) {
+                document.querySelector(`textarea[name="{{$fieldName}}"]`).value = html;
+            },
+            styleWithCSS: true,
+            actions: [
+                'bold',
+                'italic',
+                'underline',
+                'strikethrough',
+                'heading1',
+                'heading2',
+                'paragraph',
+                'quote',
+                'olist',
+                'ulist',
+                {
+                    name: 'left',
+                    icon: '<i class="fa fa-align-left" aria-hidden="true"></i>',
+                    title: 'Left Align',
+                    result: () => pell.exec('justifyLeft')
+                },
+                {
+                    name: 'center',
+                    icon: '<i class="fa fa-align-center" aria-hidden="true"></i>',
+                    title: 'Center Align',
+                    result: () => pell.exec('justifyCenter')
+                },
+                {
+                    name: 'right',
+                    icon: '<i class="fa fa-align-right" aria-hidden="true"></i>',
+                    title: 'Right Align',
+                    result: () => pell.exec('justifyRight')
+                },
+                {
+                    name: 'justify',
+                    icon: '<i class="fa fa-align-justify" aria-hidden="true"></i>',
+                    title: 'Justify',
+                    result: () => pell.exec('justifyFull')
+                }
+            ]
+        });
+
+        // Set initial content
+        editor.content.innerHTML = `{!! $facility[$fieldName] !!}`;
+    @endforeach
 </script>
 @endsection

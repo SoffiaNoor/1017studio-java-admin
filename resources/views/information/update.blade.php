@@ -268,23 +268,27 @@ Website Information / Edit
             <div class="row">
               <div class="col-md-12">
                 <div class="form-group">
-                  <label>Header Video (YouTube Link)</label>
+                  <label style="color:black">Header Video</label>
                   <div class="grid grid-cols-6">
-                    <div id="header_video_container">
-                      @if($information->header_video)
-                      <iframe width="100%" height="100%" id="header_video_display" type="hidden"
-                        src="https://www.youtube.com/embed/{{ $information->header_video }}?autoplay=1&loop=1&playlist={{ $information->header_video }}"
-                        frameborder="0" allow="autoplay; loop; encrypted-media" allowfullscreen></iframe>
-                      @else
-                      <img id="video_display2" class="object-contain items-center"
-                        style="width:20rem;height:10rem;object-fit:cover" src="{{ asset('assets/img/no-video.png') }}">
-                      @endif
+                    @if($information->header_video)
+                    <div class="p-3 shadow-lg text-center" style="background-color: #c7c7c7; border-radius:20px">
+                      <video id="video_display7" class="object-contain items-center"
+                        style="width:auto; height:10rem; object-fit:cover" controls>
+                        <source src="{{ asset($information->header_video) }}" type="video/mp4">
+                        Your browser does not support the video tag.
+                      </video>
                     </div>
+                    @else
+                    <div class="p-3 shadow-lg text-center" style="background-color: #c7c7c7; border-radius:20px">
+                      <img id="video_display2" class="object-contain items-center"
+                        style="width:20rem; height:10rem; object-fit:cover"
+                        src="{{ asset('assets/img/no-video.png') }}">
+                    </div>
+                    @endif
                   </div>
-                  <input type="text" class="form-control mt-3 @error('header_video') is-invalid @enderror"
-                    id="header_video_input" placeholder="Enter YouTube Video Link"
-                    value="https://www.youtube.com/embed/{{ $information->header_video }}">
-                  <input type="hidden" id="header_video" name="header_video" value="{{$information->header_video}}">
+                  <input type="file" class="form-control mt-3 @error('header_video') is-invalid @enderror"
+                    id="file_input8" name="header_video" accept="video/*">
+                  <small class="text-muted">Please choose a video to upload.</small>
                   @error('header_video')
                   <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -335,9 +339,9 @@ Website Information / Edit
               <div class="col-md-12">
                 <div class="form-group">
                   <label>Description</label>
-                  <textarea rows="10" name="description" id="description" cols="80"
-                    class="form-control @error('description') is-invalid @enderror"
-                    placeholder="Company Description">{{$information->description}}</textarea>
+                  <div id="editor1"></div>
+                  <textarea class="@error('description') is-invalid @enderror" name="description"
+                    style="display:none;">{{$information->description}}</textarea>
                   @error('description')
                   <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -629,6 +633,25 @@ myModal.addEventListener('shown.bs.modal', function () {
         }
     });
 
+    document.addEventListener('DOMContentLoaded', (event) => {
+    const fileInput8 = document.getElementById('file_input8');
+    const videoDisplay7 = document.getElementById('video_display7');
+    
+    if (fileInput8 && videoDisplay7) {
+      fileInput8.addEventListener('change', function() {
+        if (fileInput8.files.length > 0) {
+          const reader8 = new FileReader();
+          reader8.onload = function(e) {
+            videoDisplay7.src = e.target.result;
+            videoDisplay7.load(); // Ensure video element reloads with new source
+            // videoDisplay7.play(); // Optionally play the video automatically
+          };
+          reader8.readAsDataURL(fileInput8.files[0]);
+        }
+      });
+    }
+  });
+
     document.getElementById('video').addEventListener('input', function () {
         var youtubeLink = this.value.trim();
         var videoContainer = document.getElementById('video_container');
@@ -655,36 +678,59 @@ myModal.addEventListener('shown.bs.modal', function () {
         }
     }
 </script>
+
+<!-- Include pell CSS and JS from CDN -->
+<link rel="stylesheet" href="https://unpkg.com/pell/dist/pell.min.css">
+<script src="https://unpkg.com/pell"></script>
+
 <script>
-  document.getElementById('header_video_input').addEventListener('input', function () {
-    var youtubeLink = this.value.trim();
-    var headerVideoContainer = document.getElementById('header_video_container');
-    var headerVideoInput = document.getElementById('header_video');
+  @foreach(['description'] as $fieldName)
+        const editor = pell.init({
+            element: document.getElementById('editor{{$loop->iteration}}'),
+            onChange: function (html) {
+                document.querySelector(`textarea[name="{{$fieldName}}"]`).value = html;
+            },
+            styleWithCSS: true,
+            actions: [
+                'bold',
+                'italic',
+                'underline',
+                'strikethrough',
+                'heading1',
+                'heading2',
+                'paragraph',
+                'quote',
+                'olist',
+                'ulist',
+                {
+                    name: 'left',
+                    icon: '<i class="fa fa-align-left" aria-hidden="true"></i>',
+                    title: 'Left Align',
+                    result: () => pell.exec('justifyLeft')
+                },
+                {
+                    name: 'center',
+                    icon: '<i class="fa fa-align-center" aria-hidden="true"></i>',
+                    title: 'Center Align',
+                    result: () => pell.exec('justifyCenter')
+                },
+                {
+                    name: 'right',
+                    icon: '<i class="fa fa-align-right" aria-hidden="true"></i>',
+                    title: 'Right Align',
+                    result: () => pell.exec('justifyRight')
+                },
+                {
+                    name: 'justify',
+                    icon: '<i class="fa fa-align-justify" aria-hidden="true"></i>',
+                    title: 'Justify',
+                    result: () => pell.exec('justifyFull')
+                }
+            ]
+        });
 
-    if (youtubeLink === '') {
-        headerVideoContainer.innerHTML = '<p id="header_video_display" class="text-muted">No header video</p>';
-        headerVideoInput.value = '';
-    } else {
-        var videoId = extractVideoId(youtubeLink);
-        if (videoId) {
-            headerVideoContainer.innerHTML = '<p id="header_video_display">' + videoId + '</p>';
-            headerVideoInput.value = videoId;
-        } else {
-            headerVideoContainer.innerHTML = '<p class="text-danger">Invalid YouTube link</p>';
-            headerVideoInput.value = '';
-        }
-    }
-});
-
-function extractVideoId(url) {
-    var regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
-    var match = url.match(regExp);
-    if (match && match[2].length === 11) {
-        return match[2];
-    } else {
-        return null;
-    }
-}
-
+        // Set initial content
+        editor.content.innerHTML = `{!! $information[$fieldName] !!}`;
+    @endforeach
 </script>
 @endsection

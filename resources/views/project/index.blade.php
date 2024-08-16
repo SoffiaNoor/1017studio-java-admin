@@ -80,7 +80,7 @@ Project
                                             </div>
                                         </td>
                                         <td>
-                                            {!! substr($c->description,0,30).'...' !!}
+                                            {{ Str::limit(strip_tags($c->description), 100) }}
                                         </td>
                                         <td class="text-right">
                                             <a href="{{ route('project.show', $c->id) }}"><i

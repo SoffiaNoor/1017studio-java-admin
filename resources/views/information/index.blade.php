@@ -260,14 +260,14 @@ Website Information
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label>Header Video (YouTube Link)</label>
+                                    <label>Header Video (Uploaded Video)</label>
                                     <div class="grid grid-cols-6">
                                         <div id="header_video_container">
                                             @if($information->header_video)
-                                            <iframe width="100%" height="100%" id="header_video_display" type="hidden"
-                                                src="https://www.youtube.com/embed/{{ $information->header_video }}?autoplay=1&loop=1&playlist={{ $information->header_video }}"
-                                                frameborder="0" allow="autoplay; loop; encrypted-media"
-                                                allowfullscreen></iframe>
+                                            <video width="100%" height="100%" id="header_video_display" controls>
+                                                <source src="{{asset($information->header_video)}}" type="video/mp4">
+                                                Your browser does not support the video tag.
+                                            </video>
                                             @else
                                             <img id="video_display2" class="object-contain items-center"
                                                 style="width:20rem;height:10rem;object-fit:cover"
@@ -277,10 +277,10 @@ Website Information
                                     </div>
                                     <input type="text"
                                         class="form-control mt-3 @error('header_video') is-invalid @enderror"
-                                        id="header_video_input" placeholder="Enter YouTube Video Link"
-                                        value="https://www.youtube.com/embed/{{ $information->header_video }}" disabled>
+                                        id="header_video_input" placeholder="Enter Video File Name"
+                                        value="{{ $information->header_video }}" disabled>
                                     <input type="hidden" id="header_video" name="header_video"
-                                        value="{{$information->header_video}}" disabled>
+                                        value="{{ $information->header_video }}" disabled>
                                     @error('header_video')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -288,7 +288,7 @@ Website Information
                                     @enderror
                                 </div>
                             </div>
-                        </div>
+                        </div>                        
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
@@ -327,10 +327,10 @@ Website Information
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label>Description</label>
-                                    <textarea rows="10" name="description" id="description" cols="80"
-                                        class="form-control" placeholder="Company Description" value="Mike"
-                                        disabled>{{$information->description}}</textarea>
+                                    <label style="color:black">Description</label>
+                                    <div class="form-control" disabled>{!!
+                                        $information->description !!}
+                                    </div>
                                 </div>
                             </div>
                         </div>

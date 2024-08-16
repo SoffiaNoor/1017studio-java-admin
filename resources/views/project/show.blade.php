@@ -61,16 +61,10 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label>Description</label>
-                                        <textarea rows="10" cols="80"
-                                            class="form-control @error('description') is-invalid @enderror"
-                                            id="description" name="description"
-                                            placeholder="Here can be your description" disabled>{{$project->description}}</textarea>
-                                        @error('description')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                        @enderror
+                                        <label style="color:black">Description</label>
+                                        <div class="form-control" disabled>{!!
+                                            $project->description !!}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
