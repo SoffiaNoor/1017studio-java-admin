@@ -444,7 +444,7 @@ Website Information
                 </div>
                 <div class="card-body">
                     <h5 class="title">{{$information->name}}</h5>
-                    <p>{{$information->description}}
+                    <p>{!! $information->description !!}
                     </p>
                 </div>
                 <hr>
