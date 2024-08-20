@@ -49,6 +49,9 @@ Contact
                                         Subject
                                     </th>
                                     <th style="font-weight:500">
+                                        Email
+                                    </th>
+                                    <th style="font-weight:500">
                                         Handphone
                                     </th>
                                     <th style="font-weight:500">
@@ -70,6 +73,9 @@ Contact
                                         </td>
                                         <td>
                                             {{$c->subject}}
+                                        </td>
+                                        <td>
+                                            {{$c->email}}
                                         </td>
                                         <td>
                                             {{$c->handphone}}
