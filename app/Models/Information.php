@@ -32,5 +32,6 @@ class Information extends Model
         'order_wa',
         'footer_image',
         'maintenance',
+        'header_text',
     ];
 }

@@ -353,6 +353,21 @@ Website Information / Edit
             <div class="row">
               <div class="col-md-12">
                 <div class="form-group">
+                  <label>Header Text</label>
+                  <div id="editor2"></div>
+                  <textarea class="@error('header_text') is-invalid @enderror" name="header_text"
+                    style="display:none;">{{$information->header_text}}</textarea>
+                  @error('header_text')
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
+                  @enderror
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
                   <label>Address</label>
                   <input type="text" name="address" class="form-control @error('address') is-invalid @enderror"
                     placeholder="Home Address" value="{{$information->address}}">
@@ -684,53 +699,101 @@ myModal.addEventListener('shown.bs.modal', function () {
 <script src="https://unpkg.com/pell"></script>
 
 <script>
-  @foreach(['description'] as $fieldName)
-        const editor = pell.init({
-            element: document.getElementById('editor{{$loop->iteration}}'),
-            onChange: function (html) {
-                document.querySelector(`textarea[name="{{$fieldName}}"]`).value = html;
-            },
-            styleWithCSS: true,
-            actions: [
-                'bold',
-                'italic',
-                'underline',
-                'strikethrough',
-                'heading1',
-                'heading2',
-                'paragraph',
-                'quote',
-                'olist',
-                'ulist',
-                {
-                    name: 'left',
-                    icon: '<i class="fa fa-align-left" aria-hidden="true"></i>',
-                    title: 'Left Align',
-                    result: () => pell.exec('justifyLeft')
-                },
-                {
-                    name: 'center',
-                    icon: '<i class="fa fa-align-center" aria-hidden="true"></i>',
-                    title: 'Center Align',
-                    result: () => pell.exec('justifyCenter')
-                },
-                {
-                    name: 'right',
-                    icon: '<i class="fa fa-align-right" aria-hidden="true"></i>',
-                    title: 'Right Align',
-                    result: () => pell.exec('justifyRight')
-                },
-                {
-                    name: 'justify',
-                    icon: '<i class="fa fa-align-justify" aria-hidden="true"></i>',
-                    title: 'Justify',
-                    result: () => pell.exec('justifyFull')
-                }
-            ]
-        });
+  const editor1 = pell.init({
+      element: document.getElementById('editor1'),
+      onChange: function (html) {
+          document.querySelector(`textarea[name="description"]`).value = html;
+      },
+      styleWithCSS: true,
+      actions: [
+          'bold',
+          'italic',
+          'underline',
+          'strikethrough',
+          'heading1',
+          'heading2',
+          'paragraph',
+          'quote',
+          'olist',
+          'ulist',
+          {
+              name: 'left',
+              icon: '<i class="fa fa-align-left" aria-hidden="true"></i>',
+              title: 'Left Align',
+              result: () => pell.exec('justifyLeft')
+          },
+          {
+              name: 'center',
+              icon: '<i class="fa fa-align-center" aria-hidden="true"></i>',
+              title: 'Center Align',
+              result: () => pell.exec('justifyCenter')
+          },
+          {
+              name: 'right',
+              icon: '<i class="fa fa-align-right" aria-hidden="true"></i>',
+              title: 'Right Align',
+              result: () => pell.exec('justifyRight')
+          },
+          {
+              name: 'justify',
+              icon: '<i class="fa fa-align-justify" aria-hidden="true"></i>',
+              title: 'Justify',
+              result: () => pell.exec('justifyFull')
+          }
+      ]
+  });
 
-        // Set initial content
-        editor.content.innerHTML = `{!! $information[$fieldName] !!}`;
-    @endforeach
+  // Set initial content for description
+  editor1.content.innerHTML = `{!! $information->description !!}`;
+</script>
+
+<!-- Editor for header_text -->
+<script>
+  const editor2 = pell.init({
+      element: document.getElementById('editor2'),
+      onChange: function (html) {
+          document.querySelector(`textarea[name="header_text"]`).value = html;
+      },
+      styleWithCSS: true,
+      actions: [
+          'bold',
+          'italic',
+          'underline',
+          'strikethrough',
+          'heading1',
+          'heading2',
+          'paragraph',
+          'quote',
+          'olist',
+          'ulist',
+          {
+              name: 'left',
+              icon: '<i class="fa fa-align-left" aria-hidden="true"></i>',
+              title: 'Left Align',
+              result: () => pell.exec('justifyLeft')
+          },
+          {
+              name: 'center',
+              icon: '<i class="fa fa-align-center" aria-hidden="true"></i>',
+              title: 'Center Align',
+              result: () => pell.exec('justifyCenter')
+          },
+          {
+              name: 'right',
+              icon: '<i class="fa fa-align-right" aria-hidden="true"></i>',
+              title: 'Right Align',
+              result: () => pell.exec('justifyRight')
+          },
+          {
+              name: 'justify',
+              icon: '<i class="fa fa-align-justify" aria-hidden="true"></i>',
+              title: 'Justify',
+              result: () => pell.exec('justifyFull')
+          }
+      ]
+  });
+
+  // Set initial content for header_text
+  editor2.content.innerHTML = `{!! $information->header_text !!}`;
 </script>
 @endsection

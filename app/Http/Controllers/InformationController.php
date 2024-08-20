@@ -34,6 +34,7 @@ class InformationController extends Controller
                 'maintenance' => 'required|boolean',
                 'header_image' => ($request->hasFile('header_image') || !$information->header_image) ? 'image|mimes:jpeg,jpg,png|max:2048' : '', // Check if image is required
                 // 'footer_image' => ($request->hasFile('footer_image') || !$information->footer_image) ? 'image|mimes:jpeg,jpg,png|max:2048' : '',
+                'header_text' => 'required',
             ];
 
             if (!$request->hasFile('logo_header') && !$information->logo_header) {

@@ -337,6 +337,16 @@ Website Information
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
+                                    <label style="color:black">Header Text</label>
+                                    <div class="form-control" disabled>{!!
+                                        $information->header_text !!}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
                                     <label>Address</label>
                                     <input type="text" class="form-control" placeholder="Home Address"
                                         value="{{$information->address}}" disabled>
