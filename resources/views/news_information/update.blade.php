@@ -123,6 +123,7 @@ News Information / Edit
                   <input type="file" class="form-control mt-3 @error('header_image') is-invalid @enderror"
                     id="file_input" name="header_image" value="">
                   <small class="text-muted">Please choose an image to upload.</small>
+                  <small class="text-muted d-block">Image should be 3360px x 828px.</small>
                   @error('header_image')
                   <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>

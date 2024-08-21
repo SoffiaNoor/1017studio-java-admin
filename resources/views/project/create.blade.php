@@ -53,6 +53,7 @@ Project / Create
                                         <input type="file" name="header_image" id="file_input"
                                             class="form-control mt-2 @error('header_image') is-invalid @enderror" />
                                         <small class="text-muted">Please choose an image to upload.</small>
+                                        <small class="text-muted d-block">Image should be 3360px x 828px.</small>
                                         @error('header_image')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>

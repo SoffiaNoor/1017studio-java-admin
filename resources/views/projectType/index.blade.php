@@ -70,7 +70,7 @@ Project Type
                                             {{$c->name}}
                                         </td>
                                         <td>
-                                            {{$c->small_description}}
+                                            {{ Str::limit(strip_tags($c->small_description), 20) }}
                                         </td>
                                         <td>
 

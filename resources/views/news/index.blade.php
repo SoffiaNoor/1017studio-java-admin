@@ -143,12 +143,9 @@ News
                                             {{ Str::limit(strip_tags($c->description), 100) }}
                                         </td>
                                         <td>
-                                            <label class="switch">
-                                                <input type="checkbox" id="maintenance" name="maintenance"
-                                                    value="{{$c->is_show}}" {{ $c->is_show == 1 ? 'checked' : ''
-                                                }} disabled>
-                                                <span class="slider round"></span>
-                                            </label>
+                                            <div>
+                                                {{ $c->is_show == 1 ? 'ACTIVE' : 'NOT ACTIVE' }}
+                                            </div>
                                         </td>
                                         <td class="text-right">
                                             <a href="{{ route('news.show', $c->id) }}"><i
