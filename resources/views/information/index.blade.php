@@ -204,7 +204,7 @@ Website Information
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label>Header Image</label>
+                                    <label>Header Image <span class="text-muted">(Image should be 3360px x 828px.)</span></label>
                                     <div class="grid grid-cols-6">
                                         @if($information->header_image)
                                         <div class="p-3 shadow-lg text-center"

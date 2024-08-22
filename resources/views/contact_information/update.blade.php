@@ -105,7 +105,7 @@ Contact Information / Edit
             <div class="row">
               <div class="col-md-12">
                 <div class="form-group">
-                  <label style="color:black">Header</label>
+                  <label style="color:black">Header <span class="text-muted">(Image should be 3360px x 828px.)</span></label>
                   <div class="grid grid-cols-6">
                     @if($contact_information->header)
                     <div class="p-3 shadow-lg text-center" style="background-color: #c7c7c7;border-radius:20px">
@@ -122,7 +122,6 @@ Contact Information / Edit
                   <input type="file" class="form-control mt-3 @error('header') is-invalid @enderror" id="file_input"
                     name="header" value="">
                   <small class="text-muted">Please choose an image to upload.</small>
-                  <small class="text-muted d-block">Image should be 3360px x 828px.</small>
                   @error('header')
                   <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>

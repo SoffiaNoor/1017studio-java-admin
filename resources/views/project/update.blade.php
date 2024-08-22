@@ -72,7 +72,7 @@ Project / Edit / {{$project->id}}
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label style="color:black"> Header Image</label>
+                                        <label style="color:black"> Header Image <span class="text-muted">(Image should be 3360px x 828px.)</span></label>
                                         <div class="grid grid-cols-6">
                                             @if($project->header_image)
                                             <img id="image_display2" class="object-contain items-center"
@@ -87,7 +87,6 @@ Project / Edit / {{$project->id}}
                                         <input type="file"
                                             class="form-control mt-3 @error('header_image') is-invalid @enderror"
                                             id="file_input2" name="header_image" value="">
-                                        <small class="text-muted d-block">Image should be 3360px x 828px.</small>
                                         @error('header_image')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
